@@ -12,6 +12,7 @@ const port = 3000;
 
 //TAKE ONE DOWN AND PASS IT AROUND
 app.get("/", (req, res) => {
+    //res.json({foo: "vibes"}) //creates a json object
     res.send(`<h1>99 bottles of beer on the wall</h1>
     <a href="/98">Take one down, pass it around</a>`);
 });
@@ -32,4 +33,6 @@ app.get("/:number_of_bottles", (req, res) => {
 app.listen(port, () => {
     console.log(`tuning in live to beer port ${port}`)
 });
+
+
 
