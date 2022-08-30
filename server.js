@@ -12,22 +12,22 @@ const port = 3000;
 
 
 //define routes
-app.get("/",(request, response)=>{
+app.get("/", (request, response) => {
     response.send("Begin broadcast")
 });
 //general greeting
-app.get("/greeting",(request, response)=>{
-        response.send("Hello, stranger")
+app.get("/greeting", (request, response) => {
+    response.send("Hello, stranger")
 });
 //now assign user input specific
-app.get("/greeting/:name",(request, response)=>{
+app.get("/greeting/:name", (request, response) => {
     // response.send(`"Hello, ${request.params.name} "`)
     //above returns like an api object did, oops
     response.send(`Hello ${request.params.name}.`)
 });
 
 //now to listen to the broadcast
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`tuning in live to port ${port}`)
 });
 
@@ -36,11 +36,48 @@ app.listen(port, ()=>{
 //////////////
 
 //route it
-app.get("/tip/:total/:tipPercentage",(request,response)=>{
-    response.send(`Tip will be ${tipAmount}`)
+//put math inside the fxn
+app.get("/tip/:total/:tipPercentage", (req, res) => {
+    let tip = parseInt(req.params.total) * (parseInt(req.params.tipPercentage) * .01);
+    res.send(`Tip will be ${tip}`);
 });
 
-//now for the math behind tipAmount
+//////////
+//MAGIC 8 BALL
+//////////
+
+//array of responses
+
+const ballResponses = [
+    "It is certain", 
+    "It is decidedly so", 
+    "Without a doubt", 
+    "Yes definitely", 
+    "You may rely on it", 
+    "As I see it yes", 
+    "Most likely", 
+    "Outlook good", 
+    "Yes", 
+    "Signs point to yes", 
+    "Reply hazy try again", 
+    "Ask again later", 
+    "Better not tell you now",
+    "Cannot predict now", 
+    "Concentrate and ask again", 
+    "Don't count on it", 
+    "My reply is no", 
+    "My sources say no", 
+    "Outlook not so good", 
+    "Very doubtful"
+]
+
+app.get("/magic/:question", (req, res) => {
+    let ballResponse = ballResponses[Math.floor(Math.random()*ballResponses.length)];
+    res.send(`<h1>${ballResponse}</h1>`);
+});
+
+
+
 
 
 
