@@ -15,11 +15,11 @@ const port = 3000;
 app.get("/", (request, response) => {
     response.send("Begin broadcast")
 });
-//general greeting
+//general greeting. (specific request)
 app.get("/greeting", (request, response) => {
     response.send("Hello, stranger")
 });
-//now assign user input specific
+//now assign user input specific. (non-specific request)
 app.get("/greeting/:name", (request, response) => {
     // response.send(`"Hello, ${request.params.name} "`)
     //above returns like an api object did, oops
